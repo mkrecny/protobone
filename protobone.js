@@ -17,8 +17,8 @@ $(function(){
     },
 
     // Toggle the `done` state of this todo item.
-    toggle: function() {
-      this.save({done: !this.get("done")});
+    toggleProp: function(prop) {
+      this.save({done: !this.get(prop)});
     }
 
   });
@@ -79,7 +79,7 @@ $(function(){
 
     // The DOM events specific to an item.
     events: {
-      "click .check"              : "toggleDone",
+      "click .check"              : "toggleX",
       "dblclick div.todo-text"    : "edit",
       "click span.todo-destroy"   : "clear",
       "keypress .todo-input"      : "updateOnEnter"
@@ -107,9 +107,9 @@ $(function(){
       this.input.bind('blur', _.bind(this.close, this)).val(text);
     },
 
-    // Toggle the `"done"` state of the model.
-    toggleDone: function() {
-      this.model.toggle();
+    // Toggle the `"x"` state of the model.
+    toggleX: function() {
+      this.model.toggleProp('x');
     },
 
     // Switch this view into `"editing"` mode, displaying the input field.
