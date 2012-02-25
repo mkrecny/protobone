@@ -1,0 +1,28 @@
+Model
+-----
+Purpose:
+1. Houses state
+2. Provides funcs for getting & setting state (.get(), .set())
+3. Syncs w/ DB (via .save())
+Reqs:
+defaults : base state for new instances of this model - can be extended per instance (via new Model()) - function() (as these might change over time)
+
+View
+----
+Purpose:
+1. Renders view (via _.template in this.el)
+2. Listens for events in this.el -> assigns actions (via events : {})
+3.
+Reqs:
+1. template : the template function(s)
+1. initialize() : bind to events on model OR outside world
+2. render() : render via (via _.template in this.el)
+3. events{} : listen for DOM events from this.el
+
+Collections
+-----------
+Purpose:
+1. House models
+2. Provide funcs for accessing (ie first(), last(), filterBy())
+Reqs:
+1. model : must have - these are what coll contains

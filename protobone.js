@@ -1,14 +1,14 @@
 // Load the application once the DOM is ready, using `jQuery.ready`:
 $(function(){
 
-  // Some Model
+  // 3. Some Model
   // ----------
 
   // Our basic **SomeModel** model has `order`, and `someDefaultProp` attributes.
   // Other attributes 
   window.SomeModel = Backbone.Model.extend({
 
-    // Default attributes for a todo item. Used when .create() is called
+    // 3.1 Default attributes for a todo item. Used when .create() is called
     defaults: function() {
       return {
         someDefaultProp:  false,
@@ -16,7 +16,7 @@ $(function(){
       };
     },
 
-    // Toggle the `done` state of this todo item.
+    // 3.2 Toggle the `done` state of this todo item.
     toggleProp: function(prop) {
       this.save({done: !this.get(prop)});
     }
@@ -65,19 +65,20 @@ $(function(){
   // Create our global collection of **SomeModel**.
   window.SomeCollection = new SomeList;
 
-  // Todo Item View
+  // 4. SomeModel Item View
   // --------------
 
-  // The DOM element for a todo item...
-  window.TodoView = Backbone.View.extend({
+  // The DOM element for a SomeModel item...
+  window.SomeModelView = Backbone.View.extend({
 
-    //... is a list tag.
-    tagName:  "li",
+    //4.1... is some DOM element tag.
+    //this is the containing element of any new views that are created
+    tagName:  "sometag", //eg <sometag>
 
-    // Cache the template function for a single item.
-    template: _.template($('#item-template').html()),
+    //4.2 Cache the template function for a single item.
+    template: _.template($('#some-item-template').html()),
 
-    // The DOM events specific to an item.
+    //4.3 The DOM events specific to an item.
     events: {
       "click .check"              : "toggleX",
       "dblclick div.todo-text"    : "edit",
@@ -85,7 +86,7 @@ $(function(){
       "keypress .todo-input"      : "updateOnEnter"
     },
 
-    // The TodoView listens for changes to its model, re-rendering.
+    //4.4 Bind to events on the model.
     initialize: function() {
       this.model.bind('change', this.render, this);
       this.model.bind('destroy', this.remove, this);
@@ -150,7 +151,7 @@ $(function(){
     //1.1 Instead of generating a new element, bind to the existing skeleton of the App already present in the HTML.
     el: $("#app-container"),
 
-    //1.2 this is a function that takes 'locals' and returns html  
+    //1.2 we're caching a function that takes 'locals' and returns html  
     //the template is within a <script> w/ id some-template
     someTemplate: _.template($('#some-template').html()),
 
@@ -167,7 +168,7 @@ $(function(){
       changeThis.text('some new text');
     },
 
-    // 1.4. Bind to external events && assign any UI frequently used UI elements
+    // 1.4. Bind to external (or model if applicable) events && assign any UI frequently used UI elements
     initialize: function() {
       this.freqUsedEl    = this.$("#freq-used-el");
 
